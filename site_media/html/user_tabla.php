@@ -1,33 +1,24 @@
-<TABLE>
-<tr>
-        <form id="alta_usuario" action="" method="POST">
-        
+<tbody>
+    <tr>
+        <td>{sRfc}</td>
+        <td>{sNombre}</td>
+        <td>{sApePaterno}</td>
+        <td>{sApeMaterno}</td>
+        <td>{sEmail}</td>
+        <td>{sTipoUsuario}</td>
+        <td>{sPassword}<t/d>
         <td>
-            <div class="form_requerid"><input type="text" name="sRfc" id="sRfc" value="{sRfc}" readonly></div>
+            <form id="user_edit" action="{GET}" method="GET">
+                <input type="hidden" name="sRfc" id="sRfc" value="{sRfc}"/>
+                <input type="submit" id="enviar" value="Editar"/>
+            </form>
+        </td>
+        <td>
+            <form id="user_delete" action="{DELETE}" method="POST">
+                <input type="hidden" name="sRfc" id="sRfc" value="{sRfc}"/>
+                <input type="submit" id="enviar" value="Eliminar"/>
+            </form>            
+        </td>
 
-        </td>
-        <td>
-            <div class="form_requerid"><input type="text" name="sEmail" id="sEmail" value="{sEmail}" readonly></div>
-        </td>
-        <td>
-            <div class="form_requerid"><input type="text" name="sPassword" id="sPassword" value="{sPassword}" readonly></div>
-        </td>
-        <td>
-            <div class="form_requerid"><input type="text" name="sNombre" id="sNombre" value="{sNombre}" readonly></div>
-        </td>
-        <td>
-            <div class="form_requerid"><input type="text" name="sApePaterno" id="sApePaterno" value="{sApePaterno}" readonly></div>
-        </td>
-        <td>
-            <div class="form_requerid"><input type="text" name="sApeMaterno" id="sApeMaterno" value="{sApeMaterno}" readonly></div>
-        </td>
-        <td>
-            <div class="form_requerid"><input type="text" name="sTipoUsuario" id="sTipoUsuario" value="{sTipoUsuario}" readonly></div>
-        </td>
-        <td>
-            <div class="form_button"><input type="submit" name="enviar" id="enviar" value="Guardar"></div>
-        </td>
-        </form>
-</tr>
-</table>
+    </tr>
     

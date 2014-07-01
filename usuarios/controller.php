@@ -27,8 +27,6 @@ function handler() {
             retornar_vista(VIEW_SET_USER, $data);
             break;
         case GET_USER:
-            //print "ESTOY EN GET<br>";
-            //print_r($user_data);
             $usuario->get($user_data);
             $data = array(
                 'sRfc'=>$usuario->sRfc,
@@ -48,25 +46,17 @@ function handler() {
             retornar_vista(VIEW_DELETE_USER, $data);
             break;
         case EDIT_USER:
-            //print_r($user_data);
             $usuario->edit($user_data);
             $data = array('mensaje'=>$usuario->mensaje);
             retornar_vista(VIEW_GET_USER, $data);
             break;
         case ALL_USERS:
-            print $user_data;
+            //print $user_data;
             $usuario->get_AllUsers($user_data);
             $rows=array();
             $rows=$usuario->get_rows();
-            if(count($rows)==0){
-                $rows=array('mensaje'=>'No hay datos de la categoria '.$user_data.' para mostrar');
-                break;
-            }else{
-                print "<br> ESTOY EN ELSE ESTOY EN ELSE ESTOY EN ELSE ESTOY EN ELSE ESTOY EN ELSE ESTOY EN ELSE ESTOY EN ELSE ";
-            print "<br>ENVIADO A RETORNAR VISTA";
-            retornar_vista(VIEW_TABLE_USERS, $rows);
+            retornar_vista_allUsers(VIEW_TABLE_USERS, $rows);
             break;
-            }
         default:
             retornar_vista($event);
     }

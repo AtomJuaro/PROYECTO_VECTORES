@@ -49,7 +49,7 @@ class Usuario extends DBAbstractModel{
 					INSERT INTO Usuario
 					(sRfc, sApeMaterno, sApePaterno, sNombre, sTipoUsuario, sEmail, sPassword)
 					VALUES
-					('$sRfc' , '$sApeMaterno', '$sApePaterno' , '$sNombre' , 'Aplicador' , '$sEmail' , '$sPassword')
+					('$sRfc' , '$sApeMaterno', '$sApePaterno' , '$sNombre' , '$sTipoUsuario' , '$sEmail' , '$sPassword')
 				";
 				$this->execute_single_query();
 				$this->mensaje = 'Usuario Agregado Exitosamente';
@@ -90,7 +90,7 @@ class Usuario extends DBAbstractModel{
 
 	public function get_AllUsers($user_tipo=''){
 		$this->query ="
-			SELECT 		sRfc, sNombre, sApePaterno, sApeMaterno, sEmail, sTipoUsuario
+			SELECT 		sRfc, sNombre, sApePaterno, sApeMaterno, sEmail, sTipoUsuario, sPassword
 			FROM 		Usuario
 			WHERE 		sTipoUsuario='$user_tipo'
 

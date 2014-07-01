@@ -1,10 +1,14 @@
+<div class="datagrid">
 <table>
-  <tr>
+	<thead>
+  	<tr>
       <th>RFC</th>
       <th>Nombre</th>
       <th>Ap. Paterno </th>
       <th>Ap. Materno  </th>
       <th>Email</th>
+      <th>Tipo de Usuario</th>
       <th>Password</th>
-      <tn>Tipo de Usuario</th>
-    </tr>
+      <th colspan="2"><center>Acciones</th>
+	</tr>
+	</thead>

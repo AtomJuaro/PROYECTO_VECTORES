@@ -28,13 +28,10 @@ $diccionario = array(
 function get_template($form='get') {
     $file = '../site_media/html/user_'.$form.'.php';
     $template = file_get_contents($file);
-    print '<br><br>GET TEMPLATE:_  '.$file;
     return $template;
 }
 
 function render_dinamic_data($html, $data) {
-    print '<br><br>dentro de render<br>';
-    print_r($data);
     foreach ($data as $clave=>$valor) {
         if (is_array($valor)){
             foreach ($valor as $claveb => $valorb) {
@@ -48,21 +45,37 @@ function render_dinamic_data($html, $data) {
     return $html;
 }
 function render_dinamic_data_allUsers($html, $data){
-    print "<br>dentro de render<br>";
-    //print $html;
+    global $formulario;
+    $formulario=get_template('CabeceraTabla');
     foreach ($data as $clave=>$valor){
+        $formulario.=get_template('tabla');
         foreach ($valor as $claveb => $valorb){
-            print "<br>";
-            print $valorb;
-            $html=str_replace('{'.$claveb.'}', $valorb , $html);
+            $formulario=str_replace('{'.$claveb.'}', $valorb , $formulario);
         }
-        //print $html;
+        
     }
-    return $html;
+    $formulario.='</tbody></table></div>';
+    return $formulario;
 }
-function retornar_vista2($vista, $data=array()){
+function retornar_vista_allUsers($vista, $data=array()){
     global $diccionario;
-    $html = get_template('template');
+    $mensaje='Resultados de la consulta';
+    $formulario=get_template($vista);
+    $formulario=render_dinamic_data_allUsers($formulario, $data);
+    $html=get_template('template');
+    $html = str_replace('{subtitulo}', $diccionario['subtitle'][$vista], $html);
+    if(count($data)==0){
+        $mensaje='No hay datos para este usuario';
+        $html = str_replace('{formulario}', 'ERROR', $html);
+    }else{
+    $html = str_replace('{formulario}', $formulario, $html);
+    }
+    $html = render_dinamic_data($html, $diccionario['form_actions']);
+    $html = render_dinamic_data($html, $diccionario['links_menu']);
+    $html = str_replace('{mensaje}', $mensaje, $html);
+    print $html;
+
+    
 
 }
 
@@ -73,20 +86,7 @@ function retornar_vista($vista, $data=array()) {
     $html = str_replace('{formulario}', get_template($vista), $html);
     $html = render_dinamic_data($html, $diccionario['form_actions']);
     $html = render_dinamic_data($html, $diccionario['links_menu']);
-    print "<br>DEspues de LINKS";
-    //VERIFICAR SI ES LA OPCIÒN TODOS, EN CUYO CASO LLAMAS A RENDER2
-    //RENDER2 PINTA CABECERA DE TABLA, POR CADA LINEA HACE UNA SUSTITUCION
-    print "<br>VISTA_reetornar_vista:   ".$vista;
-    //print "TIPO DE VARIABLE". gettype($html);
-   if($vista=="tabla"){
-        print "<br>dentro de if retornar vista";
-        $html= render_dinamic_data_allUsers($html, $data);
-        //print $html;
-    }else{
-        $html = render_dinamic_data($html, $data);
-    }   
-    print "<br> Despues de datos";
-
+    $html = render_dinamic_data($html, $data);
     // render {mensaje}
     if(array_key_exists('sNombre', $data)&&
        array_key_exists('sApePaterno', $data)&&
