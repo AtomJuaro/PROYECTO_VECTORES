@@ -19,12 +19,12 @@ function handler() {
     $user_data = helper_user_data();
 
     $usuario = set_obj();
-
     switch ($event) {
         case SET_USER:
             $usuario->set($user_data);
             $data = array('mensaje'=>$usuario->mensaje);
             retornar_vista(VIEW_SET_USER, $data);
+            echo "<script>alert('".$data['mensaje']."');</script>"; 
             break;
         case GET_USER:
             $usuario->get($user_data);
@@ -35,20 +35,27 @@ function handler() {
                 'sNombre'=>$usuario->sNombre,
                 'sEmail'=>$usuario->sEmail,
                 'sPassword'=>$usuario->sPassword,
-                'sTipoUsuario'=>$usuario->sTipoUsuario
+                'sTipoUsuario'=>$usuario->sTipoUsuario,
+                'mensaje'=>$usuario->mensaje
             );
-
+            if($data['mensaje']=='Usuario no encontrado'){
+            retornar_vista(VIEW_GET_USER);
+            echo "<script>alert('".$data['mensaje']."');</script>"; 
+            break;
+            }
             retornar_vista(VIEW_EDIT_USER, $data);
             break;
         case DELETE_USER:
             $usuario->delete($user_data['sRfc']);
             $data = array('mensaje'=>$usuario->mensaje);
             retornar_vista(VIEW_DELETE_USER, $data);
+            echo "<script>alert('".$data['mensaje']."');</script>"; 
             break;
         case EDIT_USER:
             $usuario->edit($user_data);
             $data = array('mensaje'=>$usuario->mensaje);
             retornar_vista(VIEW_GET_USER, $data);
+            echo "<script>alert('".$data['mensaje']."');</script>"; 
             break;
         case ALL_USERS:
             //print $user_data;

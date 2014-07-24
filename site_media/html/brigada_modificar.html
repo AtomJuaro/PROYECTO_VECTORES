@@ -1,0 +1,21 @@
+<form id="brigada_modificar" action="{EDIT}" method="POST">
+    <div class="item_requerid">Clave de brigada</div>
+    <div class="form_requerid"><input type="text" name="CveBrigada" 
+     id="sCveBrigada" value="{CveBrigada}" readonly></div>
+    <div class="item_requerid">Clave de sector</div>
+    <div class="form_requerid"><input type="text" name="sCveSector" 
+     id="sCveSector" value="{sCveSector}" readonly></div>
+    <div class="item_requerid">Localidad</div>
+    <div class="form_requerid"><input type="text" name="sLocalidad" 
+     id="sLocalidad" value="{sLocalidad}"  readonly></div>
+    <div class="item_requerid">Fecha</div>
+    <div class="form_requerid"><input type="date" name="dFecha" id="dFecha" value="{dFecha}" min="2014-01-01" max="2015-01-01" disable="disabled" required></div>
+    <div class="item_requerid">Ciclo</div>
+    <div class="form_requerid"><input type="text" name="sCiclo" id="sCiclo" value="{sCiclo}"  title="No olvides ingresar el ciclo" maxlength="5" required></div>
+    <div class="item_requerid">Sem. Empidemiologica</div>
+    <div class="form_requerid"><input type="text" name="sSemEpidemio" id="sSemEpidemio" value="{sSemEpidemio}" maxlength="10" required></div>
+    <div class="item_requerid">Estrategia</div>
+    <div class="form_requerid"><input type="text" name="sEstrategia" id="sEstrategia" value="{sEstrategia}" maxlength="15" required></div>
+    <div class="form_button"><input type="submit" name="enviar" 
+     id="enviar" value="Guardar"></div>
+</form>

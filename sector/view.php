@@ -1,32 +1,32 @@
 <?php
 $diccionario = array(
-    'subtitle'=>array(VIEW_SET_USER=>'Crear un nuevo usuario',
-                      VIEW_GET_USER=>'Buscar usuario',
-                      VIEW_DELETE_USER=>'Eliminar un usuario',
-                      VIEW_EDIT_USER=>'Modificar usuario',
-                      VIEW_ALL_USERS=>'Ver todos los usuarios',
-                      VIEW_TABLE_USERS=>'Resultados'
+    'subtitle'=>array(VIEW_SET_SECTOR=>'Crear un nuevo Sector',
+                      VIEW_GET_SECTOR=>'Buscar sector',
+                      VIEW_DELETE_SECTOR=>'Eliminar un sector',
+                      VIEW_EDIT_SECTOR=>'Modificar un sector',
+                      VIEW_ALL_SECTORES=>'Ver todos los sectores',
+                      VIEW_TABLE_SECTORES=>'Resultados'
                      ),
     'links_menu'=>array(
-        'VIEW_SET_USER'=>MODULO.VIEW_SET_USER.'/',
-        'VIEW_GET_USER'=>MODULO.VIEW_GET_USER.'/',
-        'VIEW_EDIT_USER'=>MODULO.VIEW_EDIT_USER.'/',
-        'VIEW_DELETE_USER'=>MODULO.VIEW_DELETE_USER.'/',
-        'VIEW_ALL_USERS'=>MODULO.VIEW_ALL_USERS.'/',
-        'VIEW_TABLE_USERS'=>MODULO.VIEW_TABLE_USERS.'/'
+        'VIEW_SET_SECTOR'=>MODULO.VIEW_SET_SECTOR.'/',
+        'VIEW_GET_SECTOR'=>MODULO.VIEW_GET_SECTOR.'/',
+        'VIEW_EDIT_SECTOR'=>MODULO.VIEW_EDIT_SECTOR.'/',
+        'VIEW_DELETE_SECTOR'=>MODULO.VIEW_DELETE_SECTOR.'/',
+        'VIEW_ALL_SECTORES'=>MODULO.VIEW_ALL_SECTORES.'/',
+        'VIEW_TABLE_SECTORES'=>MODULO.VIEW_TABLE_SECTORES.'/'
     ),
     'form_actions'=>array(
-        'SET'=>'/mvc/'.MODULO.SET_USER.'/',
-        'GET'=>'/mvc/'.MODULO.GET_USER.'/',
-        'DELETE'=>'/mvc/'.MODULO.DELETE_USER.'/',
-        'EDIT'=>'/mvc/'.MODULO.EDIT_USER.'/',
-        'ALL_USERS'=>'/mvc/'.MODULO.ALL_USERS.'/',
-        'TABLE_USERS'=>'/mvc/'.MODULO.TABLE_USERS.'/'
+        'SET'=>'/mvc/'.MODULO.SET_SECTOR.'/',
+        'GET'=>'/mvc/'.MODULO.GET_SECTOR.'/',
+        'DELETE'=>'/mvc/'.MODULO.DELETE_SECTOR.'/',
+        'EDIT'=>'/mvc/'.MODULO.EDIT_SECTOR.'/',
+        'ALL_SECTORES'=>'/mvc/'.MODULO.ALL_SECTORES.'/',
+        'TABLE_SECTORES'=>'/mvc/'.MODULO.TABLE_SECTORES.'/'
     )
 );
 
 function get_template($form='get') {
-    $file = '../site_media/html/user_'.$form.'.html';
+    $file = '../site_media/html/sector_'.$form.'.html';
     $template = file_get_contents($file);
     return $template;
 }
@@ -44,7 +44,7 @@ function render_dinamic_data($html, $data) {
 
     return $html;
 }
-function render_dinamic_data_allUsers($html, $data){
+function render_dinamic_data_allSectores($html, $data){
     global $formulario;
     $formulario=get_template('CabeceraTabla');
     foreach ($data as $clave=>$valor){
@@ -57,15 +57,15 @@ function render_dinamic_data_allUsers($html, $data){
     $formulario.='</tbody></table></div>';
     return $formulario;
 }
-function retornar_vista_allUsers($vista, $data=array()){
+function retornar_vista_allSectores($vista, $data=array()){
     global $diccionario;
     $mensaje='Resultados de la consulta';
     $formulario=get_template($vista);
-    $formulario=render_dinamic_data_allUsers($formulario, $data);
+    $formulario=render_dinamic_data_allSectores($formulario, $data);
     $html=get_template('template');
     $html = str_replace('{subtitulo}', $diccionario['subtitle'][$vista], $html);
     if(count($data)==0){
-        $mensaje='No hay datos para este usuario';
+        $mensaje='No hay resultados para estos datos';
         $html = str_replace('{formulario}', 'ERROR', $html);
     }else{
     $html = str_replace('{formulario}', $formulario, $html);
@@ -88,15 +88,15 @@ function retornar_vista($vista, $data=array()) {
     $html = render_dinamic_data($html, $diccionario['links_menu']);
     $html = render_dinamic_data($html, $data);
     // render {mensaje}
-    if(array_key_exists('sNombre', $data)&&
-       array_key_exists('sApePaterno', $data)&&
-       $vista==VIEW_EDIT_USER) {
-        $mensaje = 'Editar usuario '.$data['sNombre'].' '.$data['sApePaterno'];
+    if(array_key_exists('sCveSector', $data)&&
+       array_key_exists('sLocalidad', $data)&&
+       $vista==VIEW_EDIT_SECTOR) {
+        $mensaje = 'Editar sector '.$data['sCveSector'].' '.$data['sLocalidad'];
     } else {
         if(array_key_exists('mensaje', $data)) {
             $mensaje = $data['mensaje'];
         } else {
-            $mensaje = 'Datos del usuario:';
+            $mensaje = 'Datos del sector:';
         }
     }
     $html = str_replace('{mensaje}', $mensaje, $html);

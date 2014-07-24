@@ -1,0 +1,28 @@
+   <form id="alta_brigada" name="alta_brigada"action="{SET}" method="POST" >
+
+    <div class="item_requerid">Clave de Brigada</div>
+    <div class="form_requerid">
+        <input type="number" name="CveBrigada" id="CveBrigada" placeholder="Numero de brigada" title="Debes ingresar una clave de brigada" maxlength="5" required/></div>
+    <div class="item_requerid">Clave de Sector</div>
+    <div class="form_requerid">
+        <input type="text" name="sCveSector" id="sCveSector" value="{sCveSector}" readonly /></div>
+    <div class="item_requerid">Localidad</div>
+    <div class="form_requerid">
+        <input type="text" name="sLocalidad" id="sLocalidad" value="{sLocalidad}" readonly/>
+    </div>
+    <div class="item_requerid">Fecha de la brigada</div>
+    <div class="form_requerid">
+        <input type="date" name="dFecha" id="dFecha"  min="2014-01-01" max="2015-01-01" disable="disabled" required></div>
+    <div class="item_requerid">Ciclo</div>
+    <div class="form_requerid">
+        <input type="text" name="sCiclo" id="sCiclo" placeholder="Ingresa el ciclo" title="No olvides ingresar el ciclo" maxlength="5" required></div>
+    <div class="item_requerid">Semana Epidemiologica</div>
+    <div class="form_requerid">
+        <input type="text" name="sSemEpidemio" id="sSemEpidemio" placeholder="Ingresa la semana" maxlength="10" required></div>
+    <div class="item_requerid">Estrategia</div>
+    <div class="form_requerid">
+    <input type="text" name="sEstrategia" id="sEstrategia" placeholder="Ingresa la estrategia" maxlength="15" required>
+    </div>
+    <div class="form_button"><input type="submit" name="enviar"
+     id="enviar" value="Agregar"></div>
+</form>

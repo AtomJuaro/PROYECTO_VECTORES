@@ -1,0 +1,24 @@
+<tbody>
+    <tr>
+        <td>{CveBrigada}</td>
+        <td>{sCveSector}</td>
+        <td>{sLocalidad}</td>
+        <td>{dFecha}</td>
+        <td>{sCiclo}</td>
+        <td>{sSemEpidemio}</td>
+        <td>{sEstrategia}</td>
+        <td>
+            <form id="brigada_edit" action="{GET}" method="GET">
+                <input type="hidden" name="CveBrigada" id="CveBrigada" value="{CveBrigada}"/>
+                <input type="submit" id="enviar" value="Editar"/>
+            </form>
+        </td>
+        <td>
+            <form id="brigada_delete" action="{DELETE}" method="POST">
+                <input type="hidden" name="CveBrigada" id="CveBrigada" value="{CveBrigada}"/>
+                <input type="submit" id="enviar" value="Eliminar"/>
+            </form>            
+        </td>
+
+    </tr>
+    

@@ -1,0 +1,45 @@
+<script> 
+function  validarPasswd(){
+var p1 = document.getElementById("sPassword").value;
+var p2 = document.getElementById("sPasswordB").value;
+if (p1 != p2) {
+  alert("Las contraseñas deben coincidir");
+  return false;
+}
+}
+</script>    
+    <form id="alta_usuario" name="alta_usuario"action="{SET}" method="POST"  onSubmit="return validarPasswd()">
+
+        <div class="item_requerid">RFC</div>
+        <div class="form_requerid"><input type="text" name="sRfc" placeholder="VECJ880326XXX" 
+         id="sRfc" pattern="^(([A-Z]|[a-z]|\s){1})(([A-Z]|[a-z]){3})([0-9]{6})((([A-Z]|[a-z]|[0-9]){3}))" title="Se requiere un RFC valido" required /></div>
+        <div class="item_requerid">E-mail</div>
+        <div class="form_requerid"><input type="email" name="sEmail" placeholder="persona@servicio.com" maxlength="30"
+         id="sEmail" required/></div>
+        <div class="item_requerid">Contraseña</div>
+        <div class="form_requerid"><input type="password" name="sPassword" placeholder="Ingresa contraseña" maxlength="20"
+         id="sPassword" pattern="[a-zA-Z0-9]+" required/></div>
+        <div class="item_requerid"></div>
+        <div class="form_requerid"><input type="password" name="sPasswordB" placeholder="Repite la contraseña" maxlength="20"
+         id="sPasswordB" pattern="[a-zA-Z0-9]+" required/></div>
+        <div class="item_requerid">Nombre</div>
+        <div class="form_requerid"><input type="text" name="sNombre" placeholder="Ingresa nombre" maxlength="30"
+         id="sNombre" title="Ingresa tu nombre por favor" required/></div>
+        <div class="item_requerid">Apellido Paterno</div>
+        <div class="form_requerid"><input type="text" name="sApePaterno" placeholder="Ingresa apellido paterno" maxlength="30"
+         id="sApePaterno" title="Ingresa tu apellido paterno por favor" required></div>
+        <div class="item_requerid">Apellido Materno</div>
+        <div class="form_requerid"><input type="text" name="sApeMaterno"  placeholder="Ingresa apellido materno" maxlength="30"
+         id="sApeMaterno" title="Ingresa tu apellido paterno por favor" required></div>
+        <div class="item_requerid">Tipo de Usuario</div>
+        <div class="form_requerid">
+        <select name="sTipoUsuario" id="sTipoUsuario" required>
+            <option value="Aplicativo">Aplicativo</option>
+            <option value="JefeBrigada">Jefe de brigada </option>
+            <option value="JefeSector">Jefe de sector</option>
+            <option value="Coordinador">Coordinador</option>
+        </select>
+        </div>
+        <div class="form_button"><input type="submit" name="enviar"
+         id="enviar" value="Agregar"></div>
+    </form>

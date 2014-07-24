@@ -2,37 +2,61 @@
 require_once('../core/db_abstract_model.php');
 
 class Brigada extends DBAbstractModel{
-	protected $CveBrigada;
+	public $CveBrigada;
 	public $sCveSector;
+	public $sLocalidad;
 	public $dFecha;
 	public $sCiclo;
 	public $sSemEpidemio;
 	public $sEstrategia;
+	public $mensaje;
 
 	function __construct(){
 		$this->db_name='bdVectores';
 	}
-		public function get($brigada_clave=''){
-		if($brigada_clave != ''){
-			$this->query ="
-				SELECT 	CveBrigada, sCveSector, dFecha, sCiclo, sSemEpidemio, sEstrategia
-				FROM 	Brigada
-				WHERE 	CveBrigada='$brigada_clave'
-			";
-			$this->get_results_from_query();
-		}
+	public function get($brigada_clave=''){
+
+	if($brigada_clave != ''){
+		$this->query ="
+			SELECT 	CveBrigada, sCveSector, sLocalidad, dFecha, sCiclo, sSemEpidemio, sEstrategia
+			FROM 	Brigada
+			WHERE 	CveBrigada='$brigada_clave'
+		";
+		$this->get_results_from_query();
+	}
 		if(count($this->rows)==1){
-			foreach($this->rows[0] as $propiedad=>$valor){
-				$this->$propiedad=$valor;
-			}
-			$this->mensaje='Brigada encontrada';
+		foreach($this->rows[0] as $propiedad=>$valor){
+			$this->$propiedad=$valor;
+		}
+		$this->mensaje='Brigada encontrada';
 		} else {
-			$this->mensaje='Brigada no encontrada';
+		$this->mensaje='Brigada no encontrada';
+		}
+	}
+
+	public function get_by_date($fecha1='', $fecha2=''){
+	if($fecha1 && $fecha2 != ''){
+		$this->query ="
+			SELECT 	CveBrigada, sCveSector, sLocalidad, dFecha, sCiclo, sSemEpidemio, sEstrategia
+			FROM 	Brigada
+			WHERE 	dFecha  BETWEEN '$fecha1' AND '$fecha2'
+		";
+		$this->get_results_from_query();
+	}
+		if(count($this->rows)==1){
+		foreach($this->rows[0] as $propiedad=>$valor){
+			$this->$propiedad=$valor;
+		}
+		$this->mensaje='Brigada encontrada';
+		} else {
+		$this->mensaje='Brigada no encontrada';
 		}
 	}
 
 	public function set($brigada_data=array()){
+		//print_r($brigada_data);
 		if(array_key_exists('CveBrigada', $brigada_data)){
+			//print "dentro de if";
 			$this->get($brigada_data['CveBrigada']);
 			if($brigada_data['CveBrigada']!= $this->CveBrigada){
 				foreach ($brigada_data as $campo=>$valor){
@@ -40,9 +64,9 @@ class Brigada extends DBAbstractModel{
 				}
 				$this->query="
 					INSERT INTO Brigada
-					(CveBrigada, sCveSector, dFecha, sCiclo, sSemEpidemio, sEstrategia)
+					(CveBrigada, sCveSector, sLocalidad, dFecha, sCiclo, sSemEpidemio, sEstrategia)
 					VALUES
-					('$CveBrigada' , '$sCveSector', '$dFecha' , '$sCiclo' , '$sSemEpidemio' , '$sEmail' , '$sEstrategia')
+					('$CveBrigada' , '$sCveSector', '$sLocalidad','$dFecha' , '$sCiclo' , '$sSemEpidemio' , '$sEstrategia')
 				";
 				$this->execute_single_query();
 				$this->mensaje = 'Brigada Agregada Exitosamente';
@@ -62,6 +86,7 @@ class Brigada extends DBAbstractModel{
 			UPDATE 		Brigada
 			SET 		CveBrigada='$CveBrigada', 
 						sCveSector='$sCveSector', 
+						sLocalidad='$sLocalidad',
 						dFecha='$dFecha', 
 						sCiclo='$sCiclo', 
 						sSemEpidemio='$sSemEpidemio',
@@ -73,13 +98,17 @@ class Brigada extends DBAbstractModel{
 	}
 
 	public function delete($brigada_cve=''){
+		$this->get($brigada_cve);
+		if($this->mensaje=='Brigada encontrada'){
 		$this->query="
 			DELETE FROM 	Brigada
 			WHERE 			CveBrigada='$brigada_cve'
 		";
 		$this->execute_single_query();
 		$this->mensaje='Brigada Eliminada';
+		}
 	}
+
 	function __destruct(){
 		unset($this);
 	} 

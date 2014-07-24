@@ -1,0 +1,41 @@
+<table>
+    <tr>
+	<th colspan="5"><center>
+        Selecciona el tipo de usuario:
+    </th>
+    </tr>
+    <tr>
+    <td>
+    <form id="usu_aplicativo" action="{ALL_USERS}" method="GET">
+        <div class="form_requerid"><input type="hidden" name="sTipoUsuario" 
+         id="sTipoUsuario" value="Aplicativo"></div>
+        <div class="form_button"><input type="submit"  
+         id="enviar" value="Aplicativo"></div>
+    </form>
+    </td>
+    <td>
+    <form id="usu_jefeBrigada" action="{ALL_USERS}" method="GET">
+        <div class="form_requerid"><input type="hidden" name="sTipoUsuario" 
+         id="sTipoUsuario" value="JefeBrigada"></div>
+        <div class="form_button"><input type="submit"  
+         id="enviar" value="Jefes de brigada"></div>
+    </form>
+	</td>
+    <td>
+    <form id="usu_jefeSector" action="{ALL_USERS}" method="GET">
+        <div class="form_requerid"><input type="hidden" name="sTipoUsuario" 
+         id="sTipoUsuario" value="JefeSector"></div>
+        <div class="form_button"><input type="submit"  
+         id="enviar" value="Jefe de Sector"></div>
+    </form>
+    </td>
+    <td>
+    <form id="usu_coordinador" action="{ALL_USERS}" method="GET">
+        <div class="form_requerid"><input type="hidden" name="sTipoUsuario" 
+         id="sTipoUsuario" value="Coordinador"></div>
+        <div class="form_button"><input type="submit"  
+         id="enviar" value="Coordinador"></div>
+    </form>
+    </td>  
+	</tr>
+</table>

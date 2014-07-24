@@ -22,7 +22,7 @@ print $usuario2->mensaje.'<br>';
 $usuario2->get($new_user_data['sRfc']);
 print 'NUEVO USUARIO<BR>'.$usuario2->sNombre.' '.$usuario2->sApePaterno.' '.$usuario2->sEmail.' Ha sido creado <br>';
 
-
+/*
 #editar usuario
 $edit_user_data=array(
 	'sRfc'=>'2222222',
@@ -39,7 +39,7 @@ print $usuario3->mensaje.'<br>';
 $usuario3->get($edit_user_data['sRfc']);
 print 'DATOS EDITADOS <BR>'.$usuario3->sNombre.' '. $usuario3->sApePaterno .' '.$usuario3->sEmail.' Ha sido modificado <br>';
 
-
+*/
 /*#eliminar usuaro
 $usuario4=new Usuario();
 $usuario4->get('2222222');

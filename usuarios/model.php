@@ -32,9 +32,9 @@ class Usuario extends DBAbstractModel{
 			foreach($this->rows[0] as $propiedad=>$valor){
 				$this->$propiedad=$valor;
 			}
-			$this->mensaje='Usuario encontrado';
+			$this->mensaje='Sector encontrado';
 		} else {
-			$this->mensaje='Usuario no encontrado';
+			$this->mensaje='Sector no encontrado';
 		}
 	}
 
@@ -80,12 +80,15 @@ class Usuario extends DBAbstractModel{
 	}
 
 	public function delete($user_rfc=''){
+		$this->get($user_rfc);
+		if($this->mensaje=='Usuario encontrado'){
 		$this->query="
 			DELETE FROM 	Usuario
 			WHERE 			sRfc='$user_rfc'
 		";
 		$this->execute_single_query();
 		$this->mensaje='Usuario Eliminado';
+		}
 	}
 
 	public function get_AllUsers($user_tipo=''){
@@ -96,7 +99,15 @@ class Usuario extends DBAbstractModel{
 
 		";
 		$this->get_results_from_query();
-		$this->mensaje='Resultados: ';
+		//if(count($this->rows)==1){ ORIGINAL
+		if(count($this->rows)==1){
+			foreach($this->rows[0] as $propiedad=>$valor){
+				$this->$propiedad=$valor;
+			}
+			$this->mensaje='Usuarios encontrados de tipo '.$user_tipo;
+		} else {
+			$this->mensaje='Usuario no encontrados para el tipo '.$user_tipo;
+		}
 	}
 
 	function __destruct(){

@@ -1,0 +1,22 @@
+
+    <form id="modificar_sector" action="{EDIT}" method="POST">
+        <div class="item_requerid">Clave de Sector</div>
+        <div class="form_requerid"><input type="text" name="sCveSector" 
+         id="sCveSector" value="{sCveSector}" pattern="[a-zA-Z0-9]+" maxlength="5" required></div>
+        <div class="item_requerid">Localidad</div>
+        <div class="form_requerid"><input type="text" name="sLocalidad" 
+         id="sLocalidad" value="{sLocalidad}" required></div>
+        <div class="item_requerid">Municipio</div>
+        <div class="form_requerid"><input type="text" name="sMunicipio" 
+         id="sMunicipio" value="{sMunicipio}" readonly></div>
+        <div class="item_requerid">Jurisdiccion</div>
+        <div class="form_requerid"><input type="text" name="sJurisdiccion"
+         id="sJurisdiccion" value="{sJurisdiccion}" readonly></div>
+        <div class="item_requerid">Estado</div>
+        <div class="form_requerid"><input type="text" name="sEstado" 
+         id="sEstado" value="{sEstado}" readonly></div>
+        <div class="item_requerid">Region Sanitaria</div>
+        <div class="form_requerid"><input type="text" name="sRegionSanitaria" id="sRegionSanitaria" value="{sRegionSanitaria}" readonly></div>
+        <div class="form_button"><input type="submit" name="enviar" 
+         id="enviar" value="Guardar"></div>
+    </form>

@@ -65,6 +65,15 @@ body {
     clear: left;
     text-align: right;
 }
+.title_requerid{
+    width: 300px;
+    height: 35px;
+    padding-right: 4px;
+    font-weight: bold;
+    float: left;
+    clear: left;
+    text-align: left;    
+}
 
 .form_requerid {
     height: 22px;
