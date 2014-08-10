@@ -23,6 +23,7 @@ $diccionario = array(
         'ALL_SECTORES'=>'/mvc/'.MODULO.ALL_SECTORES.'/',
         'TABLE_SECTORES'=>'/mvc/'.MODULO.TABLE_SECTORES.'/'
     )
+
 );
 
 function get_template($form='get') {

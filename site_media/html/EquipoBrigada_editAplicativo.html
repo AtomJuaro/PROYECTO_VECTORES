@@ -1,0 +1,16 @@
+<tbody>
+    <tr>
+        <td>{sRfc}</td>
+        <td>{sNombre}</td>
+        <td>{sApePaterno}</td>
+        <td>{sApeMaterno}</td>
+        <td>{sTipoUsuario}</td>
+        <td><form id="user_edit" action="{EDIT_APLICATIVO}" method="POST">
+                <input type="hidden" name="sRfc" id="sRfc" value="{sRfc}"/>
+                <input type="hidden" name="CveBrigada" id="CveBrigada" value="{CveBrigada}"/>
+                <input type="hidden" name="sTipoUsuario" id="sTipoUsuario" value="Aplicativo"/>
+                <input type="hidden" name="sRfc2" id="sRfc2" value="{sRfc2}"/>
+                <input type="submit" id="enviar" value="Seleccionar" onclick="bPreguntar = false;" onsubmit="return verificar();"/>
+            </form>
+        </td>
+    </tr>

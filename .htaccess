@@ -2,3 +2,4 @@ RewriteEngine on
 RewriteRule ^usuarios/ usuarios/controller.php
 RewriteRule ^sector/ sector/controller.php
 RewriteRule ^brigada/ brigada/controller.php
+RewriteRule ^equipo/ equipo/controller.php

@@ -32,9 +32,28 @@ class Usuario extends DBAbstractModel{
 			foreach($this->rows[0] as $propiedad=>$valor){
 				$this->$propiedad=$valor;
 			}
-			$this->mensaje='Sector encontrado';
+			$this->mensaje='Usuario encontrado';
 		} else {
-			$this->mensaje='Sector no encontrado';
+			$this->mensaje='Usuario no encontrad';
+		}
+	}
+	public function get_by_type($user_Tipo=''){
+		//print "ESTOY EN GET DEl MODELO";
+		if($user_Tipo != ''){
+			$this->query ="
+				SELECT 	sRfc, sApeMaterno, sApePaterno, sNombre, sEmail, sPassword, sTipoUsuario
+				FROM 	Usuario
+				WHERE 	sRfc='$user_rfc'
+			";
+			$this->get_results_from_query();
+		}
+		if(count($this->rows)==1){
+			foreach($this->rows[0] as $propiedad=>$valor){
+				$this->$propiedad=$valor;
+			}
+			$this->mensaje='Usuario encontrado';
+		} else {
+			$this->mensaje='Usuario no encontrad';
 		}
 	}
 

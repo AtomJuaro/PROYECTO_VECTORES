@@ -1,0 +1,31 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="es">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="/mvc/site_media/css/base_template.css">
+<title>ABM de equipo de brigada: {subtitulo}</title>
+</head>
+
+<body>
+<div id="cabecera">
+    <h1>Administrador de usuarios en brigadas</h1>
+    <h2>{subtitulo}</h2>
+</div>
+<div id="menu">
+    <a href="/mvc/{VIEW_GET_BRIGADA}" title="Nuevo equipo">Agregar nuevo equipo</a>
+    <a href="/mvc/{VIEW_GET_EQUIPO}" title="Buscar equipo">Buscar/editar equipo</a>
+    <a href="/mvc/{VIEW_DELETE_EQUIPO}" title="Borrar equipo">Borrar equipo</a>
+    <a href="/mvc/{VIEW_ALL_EQUIPO}" title="Ver Todos">Ver Todos los equipos</a>
+</div>
+<div id="mensaje">
+    {mensaje}
+</div>
+<div id="formulario">
+    {formulario}
+</div>
+
+</body>
+
+</html>

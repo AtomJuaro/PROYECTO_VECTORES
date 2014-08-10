@@ -5,7 +5,7 @@ require_once('view.php');
 require_once('../sector/model.php');
 
 function handler() {
-    $event = VIEW_GET_SECTOR;
+    $event = VIEW_GET_BRIGADA;
     $uri = $_SERVER['REQUEST_URI'];
     $peticiones = array(SET_BRIGADA, GET_SECTOR, GET_BRIGADA, DELETE_BRIGADA, EDIT_BRIGADA, ALL_BRIGADAS, TABLE_BRIGADAS,
                         VIEW_SET_BRIGADA, VIEW_GET_SECTOR, VIEW_GET_BRIGADA, VIEW_DELETE_BRIGADA, 
@@ -23,7 +23,6 @@ function handler() {
     $sector =obj_sector();
     switch ($event) {
         case SET_BRIGADA:
-        //////////////////////
             if (!array_key_exists('CveBrigada', $brigada_data)){
                 retornar_vista(VIEW_SET_BRIGADA, $brigada_data);
                 break;
@@ -35,14 +34,12 @@ function handler() {
                 break;
             }
         case GET_SECTOR:
-            ////////////////
             $sector->get_AllSector($brigada_data['sLocalidad']);
             $rows=array();
             $rows=$sector->get_rows();
             retornar_vista_allSectores(VIEW_TABLE_SECTORES, $rows);
             break;
         case GET_BRIGADA:
-            ////////////////////////
             $brigada->get($brigada_data['CveBrigada']);
             $data = array(
                 'CveBrigada'=>$brigada->CveBrigada,
@@ -52,6 +49,7 @@ function handler() {
                 'sCiclo'=>$brigada->sCiclo,
                 'sSemEpidemio'=>$brigada->sSemEpidemio,
                 'sEstrategia'=>$brigada->sEstrategia,
+                'sEstado'=>$brigada->sEstado,
                 'mensaje'=>$brigada->mensaje
                 );
             if($data['mensaje']=='Brigada no encontrada'){
@@ -62,26 +60,32 @@ function handler() {
             retornar_vista(VIEW_EDIT_BRIGADA, $data);
             break;
         case DELETE_BRIGADA:
-            ////////////////
             $brigada->delete($brigada_data['CveBrigada']);
             $data = array('mensaje'=>$brigada->mensaje);
             retornar_vista(VIEW_DELETE_BRIGADA, $data);
             echo "<script>alert('".$data['mensaje']."');</script>"; 
             break;
         case EDIT_BRIGADA:
-            //////////////--------------
             $brigada->edit($brigada_data);
             $data = array('mensaje'=>$brigada->mensaje);
             retornar_vista(VIEW_GET_BRIGADA, $data);
             echo "<script>alert('".$data['mensaje']."');</script>"; 
             break;
         case ALL_BRIGADAS:
-            //print $brigada_data;
-            $brigada->get_by_date($brigada_data['fecha1'], $brigada_data['fecha2']);
-            $rows=array();
-            $rows=$brigada->get_rows();
-            retornar_vista_allBrigadas(VIEW_TABLE_BRIGADAS, $rows);
+            if(array_key_exists('fecha1', $brigada_data) && array_key_exists('fecha2', $brigada_data)){
+                $brigada->get_by_date($brigada_data['fecha1'], $brigada_data['fecha2']);
+                $rows=array();
+                $rows=$brigada->get_rows();
+                retornar_vista_allBrigadas(VIEW_TABLE_BRIGADAS, $rows);
+                break;
+            }elseif(array_key_exists('sEstado', $brigada_data)){
+                $brigada->get_by_estado($brigada_data['sEstado']);
+                $rows=array();
+                $rows=$brigada->get_rows();
+                retornar_vista_allBrigadas(VIEW_TABLE_BRIGADAS, $rows);
+                break;
             break;
+            }
         default:
             retornar_vista($event);
     }
@@ -121,6 +125,9 @@ function helper_brigada_data() {
         if(array_key_exists('sEstrategia', $_POST)) { 
             $brigada_data['sEstrategia'] = $_POST['sEstrategia']; 
         }
+        if(array_key_exists('sEstado', $_POST)) { 
+            $brigada_data['sEstado'] = $_POST['sEstado']; 
+        }
 
     } else if($_GET) {
         if(array_key_exists('sCveSector', $_GET)) {
@@ -133,6 +140,8 @@ function helper_brigada_data() {
             $brigada_data['fecha1'] = $_GET['fecha1'];
         }if(array_key_exists('fecha2', $_GET)){
             $brigada_data['fecha2'] = $_GET['fecha2'];
+        }if(array_key_exists('sEstado', $_GET)){
+            $brigada_data['sEstado'] = $_GET['sEstado'];
         }
     }
     return $brigada_data;

@@ -1,0 +1,24 @@
+<tbody>
+    <tr>
+        <td>{sRfc}</td>
+        <td>{sNombre}</td>
+        <td>{sApePaterno}</td>
+        <td>{sApeMaterno}</td>
+        <td>{sTipoUsuario}</td>
+        <td><form id="cambiar_usuario" action="{EDIT}" method="POST">
+                <input type="hidden" name="sRfc" id="sRfc" value="{sRfc}"/>
+                <input type="hidden" name="CveBrigada" id="CveBrigada" value="{CveBrigada}"/>
+                <input type="hidden" name="sTipoUsuario" id="sTipoUsuario" value="{sTipoUsuario}"/>
+                <input type="submit" id="enviar" value="Cambiar"/>
+            </form>
+        </td>
+        <td>
+            <form id="eliminar_usuario" action="{DELETE_USER}" method="POST">
+                <input type="hidden" name="sRfc" id="sRfc" value="{sRfc}"/>
+                <input type="hidden" name="CveBrigada" id="CveBrigada" value="{CveBrigada}"/>
+                <input type="hidden" name="sTipoUsuario" id="sTipoUsuario" value="{sTipoUsuario}"/>
+                <input type="submit" id="enviar" value="Eliminar"/>
+            </form>
+        </td>
+    </tr>
+    

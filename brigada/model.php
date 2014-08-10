@@ -9,7 +9,9 @@ class Brigada extends DBAbstractModel{
 	public $sCiclo;
 	public $sSemEpidemio;
 	public $sEstrategia;
+	public $sEstado;
 	public $mensaje;
+
 
 	function __construct(){
 		$this->db_name='bdVectores';
@@ -18,7 +20,7 @@ class Brigada extends DBAbstractModel{
 
 	if($brigada_clave != ''){
 		$this->query ="
-			SELECT 	CveBrigada, sCveSector, sLocalidad, dFecha, sCiclo, sSemEpidemio, sEstrategia
+			SELECT 	CveBrigada, sCveSector, sLocalidad, dFecha, sCiclo, sSemEpidemio, sEstrategia, sEstado
 			FROM 	Brigada
 			WHERE 	CveBrigada='$brigada_clave'
 		";
@@ -37,7 +39,7 @@ class Brigada extends DBAbstractModel{
 	public function get_by_date($fecha1='', $fecha2=''){
 	if($fecha1 && $fecha2 != ''){
 		$this->query ="
-			SELECT 	CveBrigada, sCveSector, sLocalidad, dFecha, sCiclo, sSemEpidemio, sEstrategia
+			SELECT 	CveBrigada, sCveSector, sLocalidad, dFecha, sCiclo, sSemEpidemio, sEstrategia, sEstado
 			FROM 	Brigada
 			WHERE 	dFecha  BETWEEN '$fecha1' AND '$fecha2'
 		";
@@ -52,6 +54,19 @@ class Brigada extends DBAbstractModel{
 		$this->mensaje='Brigada no encontrada';
 		}
 	}
+	public function get_by_estado($sEstado=''){
+		if($sEstado !=''){
+		$this->query ="
+			SELECT 	CveBrigada, sCveSector, sLocalidad, dFecha, sCiclo, sSemEpidemio, sEstrategia, sEstado
+			FROM 	Brigada
+			WHERE 	sEstado='$sEstado';
+		";
+		$this->get_results_from_query();
+		$this->mensaje='Brigadas encontradas';
+		}else {
+			$this->mensaje='Brigadas no encontradas';
+		}
+	}
 
 	public function set($brigada_data=array()){
 		//print_r($brigada_data);
@@ -64,9 +79,9 @@ class Brigada extends DBAbstractModel{
 				}
 				$this->query="
 					INSERT INTO Brigada
-					(CveBrigada, sCveSector, sLocalidad, dFecha, sCiclo, sSemEpidemio, sEstrategia)
+					(CveBrigada, sCveSector, sLocalidad, dFecha, sCiclo, sSemEpidemio, sEstrategia, sEstado)
 					VALUES
-					('$CveBrigada' , '$sCveSector', '$sLocalidad','$dFecha' , '$sCiclo' , '$sSemEpidemio' , '$sEstrategia')
+					('$CveBrigada' , '$sCveSector', '$sLocalidad','$dFecha' , '$sCiclo' , '$sSemEpidemio' , '$sEstrategia', '$sEstado')
 				";
 				$this->execute_single_query();
 				$this->mensaje = 'Brigada Agregada Exitosamente';
@@ -82,6 +97,7 @@ class Brigada extends DBAbstractModel{
 		foreach ($brigada_data as $campo=>$valor):
 			$$campo=$valor;
 		endforeach;
+		//print 'ESTADO DENTRO DEL MODELO'.$sEstado;
 		$this->query = "
 			UPDATE 		Brigada
 			SET 		CveBrigada='$CveBrigada', 
@@ -90,7 +106,8 @@ class Brigada extends DBAbstractModel{
 						dFecha='$dFecha', 
 						sCiclo='$sCiclo', 
 						sSemEpidemio='$sSemEpidemio',
-						sEstrategia='$sEstrategia'
+						sEstrategia='$sEstrategia',
+						sEstado='$sEstado'
 			WHERE 		CveBrigada='$CveBrigada'
 		";
 		$this->execute_single_query();

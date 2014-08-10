@@ -1,0 +1,31 @@
+
+<script type="text/javascript">
+    var bPreguntar = true;
+     
+    window.onbeforeunload = preguntarAntesDeSalir;
+     
+    function preguntarAntesDeSalir()
+    {
+      if (bPreguntar)
+        return "Debes terminar de agregar los usuarios a la brigada antes de salir";
+    }
+</script>
+
+
+<br>
+<h3>Seleccione un aplicativo de la siguiente lista para sustituir el aplicativo {sRfc2}</h3>
+<div class="datagrid">
+<table>
+	<thead>
+    <tr align="center">
+      <th colspan="6">Usuario aplicativo para la brigada '{CveBrigada}'</th>
+    </tr>
+  	<tr>
+      <th>Seleccion</th>
+      <th>RFC</th>
+      <th>Nombre</th>
+      <th>Ape. Paterno</th>
+      <th>Ape. Materno </th>
+      <th>Tipo de Usuario</th>
+	</tr>
+	</thead>

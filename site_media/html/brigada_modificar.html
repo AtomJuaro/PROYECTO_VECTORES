@@ -16,6 +16,14 @@
     <div class="form_requerid"><input type="text" name="sSemEpidemio" id="sSemEpidemio" value="{sSemEpidemio}" maxlength="10" required></div>
     <div class="item_requerid">Estrategia</div>
     <div class="form_requerid"><input type="text" name="sEstrategia" id="sEstrategia" value="{sEstrategia}" maxlength="15" required></div>
+    <div class="item_requerid">Estado:</div>
+    <div class="form_requerid">
+        <select name="sEstado" id="sEstado" required>
+        <option value="{sEstado}">{sEstado}</option>
+        <option value="Activo">Activo</option>
+        <option value="Inactivo">Inactivo</option>
+        </select>
+    </div>
     <div class="form_button"><input type="submit" name="enviar" 
      id="enviar" value="Guardar"></div>
 </form>

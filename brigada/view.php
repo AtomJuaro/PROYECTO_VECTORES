@@ -17,7 +17,7 @@ $diccionario = array(
         'VIEW_DELETE_BRIGADA'=>MODULO.VIEW_DELETE_BRIGADA.'/',
         'VIEW_ALL_BRIGADAS'=>MODULO.VIEW_ALL_BRIGADAS.'/',
         'VIEW_TABLE_BRIGADAS'=>MODULO.VIEW_TABLE_BRIGADAS.'/',
-        'VIEW_TABLE_SECTORES'=>SECTOR.VIEW_TABLE_SECTORES.'/'
+        'VIEW_TABLE_SECTORES'=>MODULO.VIEW_TABLE_SECTORES.'/'
     ),
     'form_actions'=>array(
         'SET'=>'/mvc/'.MODULO.SET_BRIGADA.'/',
@@ -64,6 +64,7 @@ function render_dinamic_data_allBrigadas($html, $data){
 }
 function retornar_vista_allBrigadas($vista, $data=array()){
     global $diccionario;
+    //print $vista;
     $mensaje='Resultados de la consulta';
     $formulario=get_template($vista);
     $formulario=render_dinamic_data_allBrigadas($formulario, $data);
