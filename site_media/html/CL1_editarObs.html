@@ -1,0 +1,15 @@
+</tbody>
+</table>
+	<form id="add_fila" action="{SET_DATA}" method="POST">
+        <input type="hidden" name="sOrden" id="sOrden" value="{sOrden}"/>
+        <input type="hidden" name="sCveSector" id="sCveSector" value="{sCveSector}"/>
+		<input type="hidden" name="CveBrigada" id="CveBrigada" value="{CveBrigada}"/>
+       	<input type="submit" name="enviar" id="enviar" value="Nueva Fila"><br><br>
+    </form>
+    <form id="edit_observaciones" action="{EDIT_OBS}" method="POST">       
+            <label for="sObservaciones">Observaciones</label><br>
+            <input type="hidden" name="CveBrigada" id="CveBrigada" value="{CveBrigada}"/>
+            <textarea name="sObservaciones" id="sObservaciones" rows="2" cols="30">{sObservaciones}</textarea><br>
+            <input type="submit" name="enviar" id="enviar" value="Salvar datos"></div>
+    </form>
+</div>

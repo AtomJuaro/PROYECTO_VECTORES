@@ -1,0 +1,47 @@
+    <form id="alta_usuario" action="{EDIT_CL1}" method="POST">
+        <div class="item_requerid">Orden:</div>
+        <div class="form_requerid">{sOrden}<input type="hidden" name="sOrden" 
+         id="sOrden" value="{sOrden}"/><input type="hidden" name="CveBrigada" 
+         id="CveBrigada" value="{CveBrigada}"/></div>
+        <div class="item_requerid">Clave de sector:</div>
+        <div class="form_requerid">{sCveSector}<input type="hidden" name="sCveSector" 
+         id="sCveSector" value="{sCveSector}"/></div>
+        <div class="item_requerid">Domicilio:</div>
+        <div class="form_requerid"><input type="text" name="sDomicilio" placeholder="Domicilio" id="sDomicilio" maxlength="80" value="{sDomicilio}" required/>
+        </div>
+        <div class="item_requerid">Clave de Manzana</div>
+        <div class="form_requerid"><input type="text" name="sCveManzana" id="sCveManzana" title="Se requiere agregar la clave" maxlength="10" value="{sCveManzana}" required/></div>
+        <div class="item_requerid">Lote</div>
+        <div class="form_requerid">
+                <select name="bLote" id="bLote">
+                <option value="{bLote}" selected>{bLote}<option>
+                <option value="SI" >SI</option>
+                <option value="NO">NO</option>
+                </select></div>
+        <div class="item_requerid">Casas</div>
+        <div class="form_requerid"><select name="sCasa" id="sCasa">
+                <option value="{sCasa}" selected>{sCasa}</option>
+                <option value="Trabajada">Trabajada</option>
+                <option value="Cerrada">Cerrada </option>
+                <option value="Deshabitada">Deshabitada</option>
+                <option value="Renuencia">Renuencia</option>
+                </select></div>        
+        <div class="item_requerid">Depositos Revisados</div>
+        <div class="form_requerid"><input type="number" name="nRevisados" id="nRevisados" maxlength="3" value="{nRevisados}"/></div>
+        <div class="item_requerid">Depositos Abatizados</div>
+        <div class="form_requerid"><input type="number" name="nAbatizados" id="nAbatizados" maxlength="3" value="{nAbatizados}"/></div>
+        <div class="item_requerid">Depositos Eliminados</div>
+        <div class="form_requerid"><input type="number" name="nEliminados" id="nEliminados" maxlength="3" value="{nEliminados}"/></div>
+        <div class="item_requerid">Depositos Controlados</div>
+        <div class="form_requerid"><input type="number" name="nControlados" id="nControlados" maxlength="3" value="{nControlados}"/></div>
+        <div class="item_requerid">Depositos No tratados</div>
+        <div class="form_requerid"><input type="number" name="nNoTratados" id="nNoTratados" maxlength="3" value="{nNoTratados}"/></div>
+        <div class="item_requerid">Larvicida Consumido</div>
+        <div class="form_requerid"><input type="number" name="nLarvicidaConsumido" id="nLarvicidaConsumido" maxlength="3" step="any" value="{nLarvicidaConsumido}"/></div>
+        <div class="item_requerid">Volumen de agua tratada</div>
+        <div class="form_requerid"><input type="number" name="nVolumenTratado" id="nVolumenTratado" maxlength="3" step="any" value="{nVolumenTratado}"/></div>
+        <div class="item_requerid">Num. de Habitantes</div>
+        <div class="form_requerid"><input type="number" name="nHabitantes" id="nHabitantes" maxlength="3" value="{nHabitantes}"/></div>
+        <div class="form_button"><input type="submit" name="enviar" 
+         id="enviar" value="Guardar"></div>
+    </form>

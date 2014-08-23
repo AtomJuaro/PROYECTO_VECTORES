@@ -9,7 +9,7 @@
                 <input type="hidden" name="sRfc" id="sRfc" value="{sRfc}"/>
                 <input type="hidden" name="CveBrigada" id="CveBrigada" value="{CveBrigada}"/>
                 <input type="hidden" name="sTipoUsuario" id="sTipoUsuario" value="Aplicativo"/>
-                <input type="submit" id="enviar" value="Seleccionar"/>
+                <input type="submit" id="enviar" value="Seleccionar" onclick="bPreguntar = false;" onsubmit="return verificar();"/>
             </form>
         </td>
     </tr>

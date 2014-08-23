@@ -1,5 +1,7 @@
 <?php
+session_start();
 $diccionario = array(
+    'user'=>array('{sUsuario}'=>$_SESSION["sNombre"]),
     'subtitle'=>array(VIEW_SET_BRIGADA=>'Registrar una nueva brigada',
                       VIEW_GET_BRIGADA=>'Buscar brigada',
                       VIEW_GET_SECTOR=>'Buscar sector',
@@ -70,6 +72,7 @@ function retornar_vista_allBrigadas($vista, $data=array()){
     $formulario=render_dinamic_data_allBrigadas($formulario, $data);
     $html=get_template('template');
     $html = str_replace('{subtitulo}', $diccionario['subtitle'][$vista], $html);
+    $html = str_replace('{sUsuario}', $diccionario['user']['{sUsuario}'], $html);
     if(count($data)==0){
         $mensaje='No hay resultados para estos datos';
         $html = str_replace('{formulario}', 'ERROR', $html);
@@ -80,15 +83,13 @@ function retornar_vista_allBrigadas($vista, $data=array()){
     $html = render_dinamic_data($html, $diccionario['links_menu']);
     $html = str_replace('{mensaje}', $mensaje, $html);
     print $html;
-
-    
-
 }
 
 function retornar_vista($vista, $data=array()) {
     global $diccionario;
     $html = get_template('template');
     $html = str_replace('{subtitulo}', $diccionario['subtitle'][$vista], $html);
+    $html = str_replace('{sUsuario}', $diccionario['user']['{sUsuario}'], $html);
     $html = str_replace('{formulario}', get_template($vista), $html);
     $html = render_dinamic_data($html, $diccionario['form_actions']);
     $html = render_dinamic_data($html, $diccionario['links_menu']);
@@ -130,6 +131,7 @@ function retornar_vista_allSectores($vista, $data=array()){
     $formulario=render_dinamic_data_allSectores($formulario, $data);
     $html=get_template('template');
     $html = str_replace('{subtitulo}', $diccionario['subtitle'][$vista], $html);
+    $html = str_replace('{sUsuario}', $diccionario['user']['{sUsuario}'], $html);
     if(count($data)==0){
         $mensaje='No hay resultados para estos datos';
         $html = str_replace('{formulario}', 'ERROR', $html);

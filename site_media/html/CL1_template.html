@@ -1,0 +1,39 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" 
+  "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="es">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" type="text/css" href="/mvc/site_media/css/base_template.css">
+<link rel="stylesheet" type="text/css" href="/mvc/site_media/css/tables.css">
+<script src="/mvc/site_media/js/jquery-1.11.1.min.js" type="text/javascript"></script>
+<script src="/mvc/site_media/js/agregarFila.js" type="text/javascript"></script>
+
+<title>ABM de CL1: {subtitulo}</title>
+</head>
+
+<body>
+<div id="cabecera">
+	<div id="encabezado">
+    <h1>Administrador de CL1</h1>
+    <h2>{subtitulo}</h2>
+    </div>
+<div id="user">
+	<a href="/mvc/sesion/"><img src="/mvc/site_media/img/aplicativo.png"/></a><br>{sUsuario} <a href='/mvc/SESION/logout.php'>Salir</a>
+</div>
+</div>
+<div id="menu">
+    <a href="/mvc/{VIEW_GET_BRIGADA}" title="Nuevo equipo">Agregar CL1 Nuevo</a>
+    <a href="{GET_CL1}" title="Buscar/editar CL1">Buscar/editar CL1</a>
+    <a href="/mvc/{VIEW_DELETE_CL1}" title="Borrar cl1">Borrar CL1</a>
+</div>
+<div id="mensaje">
+    {mensaje}
+</div>
+<div id="formulario">
+    {formulario}
+</div>
+
+</body>
+
+</html>

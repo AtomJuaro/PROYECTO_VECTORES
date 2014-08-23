@@ -4,6 +4,7 @@ require_once('model.php');
 require_once('view.php');
 
 function handler() {
+if($_SESSION['sTipoUsuario']=='Coordinador'|| $_SESSION['sTipoUsuario']=='MASTER'){
     $event = VIEW_GET_SECTOR;
     $uri = $_SERVER['REQUEST_URI'];
     $peticiones = array(SET_SECTOR, GET_SECTOR, DELETE_SECTOR, EDIT_SECTOR, ALL_SECTORES, TABLE_SECTORES,
@@ -67,6 +68,9 @@ function handler() {
         default:
             retornar_vista($event);
     }
+    }else{
+    header("location:/mvc/site_media/html/access_denied.html");
+}
 }
 
 

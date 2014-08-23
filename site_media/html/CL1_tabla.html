@@ -1,0 +1,34 @@
+
+<tbody>
+		<tr align="center">
+			<td>{sOrden} </td>
+			<td>{sDomicilio}</td>
+			<td>{sCveSector}</td>
+			<td>{sCveManzana}</td>
+			<td>{bLote}</td>
+			<td>{sCasa}</td>
+			<td>{nRevisados}</td>
+			<td>{nAbatizados}</td>
+			<td>{nEliminados}</td>
+			<td>{nControlados}</td>
+			<td>{nNoTratados}</td>
+			<td>{nLarvicidaConsumido}</td>
+			<td>{nVolumenTratado}</td>
+			<td>{nHabitantes}</td>
+			<td valign="middle"> 
+				<form action="{GET_DATA}" method="POST">
+					<input type="hidden" name="CveBrigada" id="CveBrigada" value="{CveBrigada}"/>
+					<input type="hidden" name="sOrden" id="sOrden" value="{sOrden}"/>
+					<input type="hidden" name="sCveSector" id="sCveSector" value="{sCveSector}"/>
+					<input type="hidden" name="CveBrigada" id="CveBrigada" value="{CveBrigada}"/>
+					<input type="submit" id="" value="Editar"/>
+				</form>
+        	</td>
+			<td valign="middle">
+				<form id="data_delete" action="{DELETE_CL1}" method="POST">
+                <input type="hidden" name="CveBrigada" id="CveBrigada" value="{CveBrigada}"/>
+                <input type="hidden" name="sOrden" id="sOrden" value="{sOrden}"/>
+                <input type="submit" id="" value="Eliminar"/>
+            	</form>
+            </td>
+		</tr>

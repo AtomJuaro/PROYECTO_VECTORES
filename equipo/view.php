@@ -1,5 +1,7 @@
 <?php
+session_start();
 $diccionario = array(
+    'user'=>array('{sUsuario}'=>$_SESSION["sNombre"]),
     'subtitle'=>array(VIEW_SET_EQUIPO=>'Crear un nuevo equipo',
                       VIEW_GET_EQUIPO=>'Buscar equipo',
                       VIEW_GET_BRIGADA=>'Busqueda de brigada',
@@ -12,7 +14,8 @@ $diccionario = array(
                       VIEW_TABLE_EDITJEFE=>'Cambio de Jefe de Brigada',
                       VIEW_TABLE_EDITAPLICATIVO=>'Cambio de Aplicativo',
                       VIEW_TABLE_ALLEQUIPO=>'Equipos activos',
-                      VIEW_ALL_EQUIPO=>'Selecciona el estado de la brigada'
+                      VIEW_ALL_EQUIPO=>'Selecciona el estado de la brigada',
+                      VIEW_TABLE_JEFESECTOR=>'Seleccione el jefe de Sector'
 
                      ),
     'links_menu'=>array(
@@ -27,7 +30,8 @@ $diccionario = array(
         'VIEW_TABLE_EDITJEFE'=>EQUIPO.VIEW_TABLE_EDITJEFE.'/',
         'VIEW_TABLE_EDITAPLICATIVO'=>EQUIPO.VIEW_TABLE_EDITAPLICATIVO.'/',
         'VIEW_TABLE_ALLEQUIPO'=>EQUIPO.VIEW_TABLE_ALLEQUIPO.'/',
-        'VIEW_ALL_EQUIPO'=>EQUIPO.VIEW_ALL_EQUIPO.'/'
+        'VIEW_ALL_EQUIPO'=>EQUIPO.VIEW_ALL_EQUIPO.'/',
+        'VIEW_TABLE_JEFESECTOR'=>EQUIPO.VIEW_TABLE_JEFESECTOR.'/'
 
     ),
     'form_actions'=>array(
@@ -43,7 +47,9 @@ $diccionario = array(
         'SET_APLICATIVO'=>'/mvc/'.EQUIPO.SET_APLICATIVO.'/',
         'EDIT_JEFE'=>'/mvc/'.EQUIPO.EDIT_JEFE.'/',
         'EDIT_APLICATIVO'=>'/mvc/'.EQUIPO.EDIT_APLICATIVO.'/',
-        'ALL_EQUIPO'=>'/mvc/'.EQUIPO.ALL_EQUIPO.'/'
+        'ALL_EQUIPO'=>'/mvc/'.EQUIPO.ALL_EQUIPO.'/',
+        'SET_JEFESECTOR'=>'/mvc/'.EQUIPO.SET_JEFESECTOR.'/',
+        'GET_JEFESECTOR'=>'/mvc/'.EQUIPO.GET_JEFESECTOR.'/'
     )
 );
 
@@ -91,6 +97,10 @@ function render_dinamic_data_allUsers($html, $data){
             $cabecera='tablaEquiposCabecera';
             $tabla='tablaEquipos';
             break;
+        case "jefeSector":
+            $cabecera='cabeceraJefeSector';
+            $tabla='jefeSector';
+            break;
         default:
             $cabecera='cabeceraEquipo';
             $tabla='equipo';
@@ -101,7 +111,7 @@ function render_dinamic_data_allUsers($html, $data){
         if(count($valor)>1 || $html=='tablaEquipos'){
         $formulario.=get_template($tabla);
         } if( $clave==$n-1 && $html=='tablaEquipo'){
-            while($n<7){
+            while($n<8){
             $formulario.='<tr><td colspan="7" align="right">
                         <form id="agregar_usuario" action="{EDIT}" method="POST">
                         <input type="hidden" name="CveBrigada" id="CveBrigada" value="{CveBrigada}"/>
@@ -130,19 +140,21 @@ function retornar_vista_allUsers($vista, $data=array()){
     $formulario=render_dinamic_data_allUsers($formulario, $data);
     $html=get_template('template');
     $html = str_replace('{subtitulo}', $diccionario['subtitle'][$vista], $html);
+     $html = str_replace('{sUsuario}', $diccionario['user']['{sUsuario}'], $html);
     
     if(count($data)==0 && $vista=='tablaAplicativo'){
-        print "dentro de ir";
         $mensaje='No hay datos que mostrar';
         $html = str_replace('{formulario}', '<h2>ERROR</h2><BR> Si no ve datos en esta vista puede ser que:<br>
             <li> La base de datos no cuenta con los datos requeridos </li>
             <li> Si cree que esto es un error contacte al administrador', $html);
-    }else if(count($data)<=1 ){
+    //<=
+    }else if(count($data)<1 ){
         $mensaje='No hay datos que mostrar';
         $html = str_replace('{formulario}', '<h2>ERROR</h2><BR> Si no ve datos en esta vista puede ser que:<br>
             <li> La base de datos no cuenta con los datos requeridos </li>
             <li> Si cree que esto es un error contacte al administrador', $html);
     }else{
+
     $html = str_replace('{formulario}', $formulario, $html);
     }
     $html = render_dinamic_data($html, $diccionario['form_actions']);
@@ -161,6 +173,7 @@ function retornar_vista($vista, $data=array()) {
     $html = str_replace('{formulario}', get_template($vista), $html);
     $html = render_dinamic_data($html, $diccionario['form_actions']);
     $html = render_dinamic_data($html, $diccionario['links_menu']);
+     $html = str_replace('{sUsuario}', $diccionario['user']['{sUsuario}'], $html);
     $html = render_dinamic_data($html, $data);
     if(array_key_exists('CveBrigada', $data)&& $vista==VIEW_EDIT_EQUIPO) {
         $mensaje = 'Editar equipo de brigada '.$data['CveBrigada'];
@@ -196,6 +209,7 @@ function retornar_vista_allBrigadas($vista, $data=array()){
     $formulario=render_dinamic_data_allBrigadas($formulario, $data);
     $html=get_template('template');
     $html = str_replace('{subtitulo}', $diccionario['subtitle'][$vista], $html);
+     $html = str_replace('{sUsuario}', $diccionario['user']['{sUsuario}'], $html);
     if(count($data)==0){
         $mensaje='No hay brigadas que mostrar';
         $html = str_replace('{formulario}', '<h2>ERROR</h2><BR> Si no ve datos en esta vista<br>

@@ -6,10 +6,11 @@ require_once('../brigada/model.php');
 require_once('../usuarios/model.php');
 
 function handler() {
+if($_SESSION['sTipoUsuario']=='Coordinador'|| $_SESSION['sTipoUsuario']=='MASTER'){
     $event = VIEW_GET_EQUIPO;
     $uri = $_SERVER['REQUEST_URI'];
-    $peticiones = array(SET_EQUIPO, GET_EQUIPO, GET_BRIGADA, GET_JEFE, SET_JEFE, DELETE_EQUIPO, DELETE_USER, EDIT_EQUIPO, EDIT_JEFE, EDIT_APLICATIVO, ALL_EQUIPO,
-                        GET_APLICATIVO, DELETE_USER, SET_APLICATIVO, VIEW_TABLE_APLICATIVO, VIEW_EDIT_EQUIPO, VIEW_TABLE_EQUIPO, VIEW_ALL_EQUIPO,
+    $peticiones = array(SET_EQUIPO, GET_EQUIPO, GET_BRIGADA, GET_JEFE, SET_JEFE, DELETE_EQUIPO, DELETE_USER, EDIT_EQUIPO, EDIT_JEFE, EDIT_APLICATIVO, ALL_EQUIPO, GET_JEFESECTOR, SET_JEFESECTOR,
+                        GET_APLICATIVO, DELETE_USER, SET_APLICATIVO, VIEW_TABLE_APLICATIVO, VIEW_EDIT_EQUIPO, VIEW_TABLE_EQUIPO, VIEW_ALL_EQUIPO, VIEW_TABLE_JEFESECTOR,
                         VIEW_SET_EQUIPO, VIEW_GET_EQUIPO, VIEW_GET_BRIGADA, VIEW_DELETE_EQUIPO, VIEW_TABLE_JEFE, VIEW_TABLE_EDITJEFE, VIEW_TABLE_ALLEQUIPO
                         );
     foreach ($peticiones as $peticion) {
@@ -25,11 +26,29 @@ function handler() {
     $CveBrigada='0';
     switch ($event) {
         case GET_BRIGADA:
-            //print_r($equipo_data);
+        
             $equipo->brigada_by_estado($equipo_data);
             $rows=array();
             $rows=$equipo->get_rows();
             retornar_vista_allBrigadas(VIEW_TABLE_BRIGADAS, $rows);
+            break;
+        case GET_JEFESECTOR:
+            //print_r($equipo_data);
+
+            $equipo->get_Users($equipo_data['sTipoUsuario']);
+            $rows=array();
+            $rows=$equipo->get_rows();
+            //$rows=array_merge((array)$rows, (array)$equipo_data);
+            $rows[]['CveBrigada']=$equipo_data['CveBrigada'];
+            //print '<br>ROWS:';
+            //print_r($rows);
+            retornar_vista_allUsers(VIEW_TABLE_JEFESECTOR,$rows);
+            break;
+        case SET_JEFESECTOR:
+            //print_r($equipo_data);
+            $equipo->set($equipo_data['CveBrigada'], $equipo_data['sRfc']);
+            $mensaje=$equipo->mensaje;
+            goto GET_JEFE;
             break;
         case GET_JEFE:
             GET_JEFE:
@@ -91,8 +110,8 @@ function handler() {
             break;
         case DELETE_USER:
             //print_r($equipo_data);
-            if($equipo_data['sTipoUsuario']=='JefeBrigada'){
-                echo "<script>alert('No es posible eliminar el Jefe de Brigada');</script>"; 
+            if($equipo_data['sTipoUsuario']=='JefeBrigada'||$equipo_data['sTipoUsuario']=='JefeSector'){
+                echo "<script>alert('No es posible eliminar al usuario seleccionado');</script>"; 
                 goto GET_EQUIPO;
             }else{
                 $equipo->delete($equipo_data['sRfc']);
@@ -141,6 +160,9 @@ function handler() {
         default:
             retornar_vista($event);
     }
+    }else{
+    header("location:/mvc/site_media/html/access_denied.html");
+}
 }
 
 

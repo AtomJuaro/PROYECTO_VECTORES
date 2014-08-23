@@ -14,7 +14,6 @@ class EquipoBrigada extends DBAbstractModel{
 	function __construct(){
 		$this->db_name='bdVectores';
 	}
-
 	public function get($CveBrigada=''){
 		//print "ESTOY EN GET DEl MODELO";
 		if($CveBrigada != ''){
@@ -83,8 +82,28 @@ class EquipoBrigada extends DBAbstractModel{
 		//print 'USER TIPO'.$user_tipo;
 		$this->query ="
 			SELECT sRfc, sNombre, sApePaterno, sApeMaterno, sTipoUsuario
-			FROM Usuario
-			WHERE 	sTipoUsuario='$user_tipo' AND Usuario.sRfc NOT IN(SELECT sRfc FROM EquipoBrigada)
+			FROM 	Usuario
+			WHERE 	sTipoUsuario='$user_tipo' AND Usuario.sRfc NOT IN(SELECT sRfc FROM EquipoBrigada WHERE CveBrigada IN (SELECT CveBrigada FROM Brigada WHERE sEstado='Activo'))
+
+		";
+		$this->get_results_from_query();
+		//if(count($this->rows)==1){ ORIGINAL
+		if(count($this->rows)==1){
+			foreach($this->rows[0] as $propiedad=>$valor){
+				$this->$propiedad=$valor;
+			}
+			$this->mensaje='Usuarios encontrados de tipo '.$user_tipo;
+		} else {
+			$this->mensaje='Usuario no encontrados para el tipo '.$user_tipo;
+		}
+	}
+
+	public function get_Users($user_tipo=''){
+		//print 'USER TIPO'.$user_tipo;
+		$this->query ="
+			SELECT 	sRfc, sNombre, sApePaterno, sApeMaterno, sTipoUsuario
+			FROM 	Usuario
+			WHERE 	sTipoUsuario='$user_tipo'
 
 		";
 		$this->get_results_from_query();

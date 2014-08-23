@@ -2,8 +2,8 @@
 require_once('constants.php');
 require_once('model.php');
 require_once('view.php');
-
 function handler() {
+if($_SESSION['sTipoUsuario']=='Coordinador'|| $_SESSION['sTipoUsuario']=='MASTER'){
     $event = VIEW_GET_USER;
     $uri = $_SERVER['REQUEST_URI'];
     $peticiones = array(SET_USER, GET_USER, DELETE_USER, EDIT_USER, ALL_USERS, TABLE_USERS,
@@ -17,7 +17,6 @@ function handler() {
     }
 
     $user_data = helper_user_data();
-
     $usuario = set_obj();
     switch ($event) {
         case SET_USER:
@@ -67,6 +66,9 @@ function handler() {
         default:
             retornar_vista($event);
     }
+}else{
+    header("location:/mvc/site_media/html/access_denied.html");
+}
 }
 
 

@@ -1,4 +1,15 @@
-<h3>Seleccione un jefe de brigada </h3>
+<script type="text/javascript">
+    var bPreguntar = true;
+     
+    window.onbeforeunload = preguntarAntesDeSalir;
+     
+    function preguntarAntesDeSalir()
+    {
+      if (bPreguntar)
+        return "Debes terminar de agregar los usuarios a la brigada antes de salir";
+    }
+</script>
+<h3>Seleccione un <i>jefe de brigada</i> </h3>
 
 <div class="datagrid">
 <table>

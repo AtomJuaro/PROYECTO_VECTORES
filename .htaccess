@@ -3,3 +3,6 @@ RewriteRule ^usuarios/ usuarios/controller.php
 RewriteRule ^sector/ sector/controller.php
 RewriteRule ^brigada/ brigada/controller.php
 RewriteRule ^equipo/ equipo/controller.php
+RewriteRule ^CL1/ CL1/controller.php
+RewriteRule ^sesion/ sesion/controller.php
+RewriteRule ^html/ site_media/html/access_denied.html

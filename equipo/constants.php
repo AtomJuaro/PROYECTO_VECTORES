@@ -16,7 +16,8 @@ const EDIT_EQUIPO = 'edit';
 const EDIT_JEFE ='editJefe';
 const EDIT_APLICATIVO='editAplicativo';
 const ALL_EQUIPO='equipos';
-
+const GET_JEFESECTOR='jefeSector';
+const SET_JEFESECTOR='agregar_jefeSector';
 
 # vistas
 const VIEW_SET_EQUIPO = 'agregar';
@@ -32,5 +33,6 @@ const VIEW_TABLE_EDITJEFE='editJefe';
 const VIEW_TABLE_EDITAPLICATIVO='editAplicativo';
 const VIEW_ALL_EQUIPO='allEquipo';
 const VIEW_TABLE_ALLEQUIPO='tablaEquipos';
+const VIEW_TABLE_JEFESECTOR='jefeSector';
 
 ?>

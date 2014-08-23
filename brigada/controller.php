@@ -5,6 +5,7 @@ require_once('view.php');
 require_once('../sector/model.php');
 
 function handler() {
+if($_SESSION['sTipoUsuario']=='Coordinador'|| $_SESSION['sTipoUsuario']=='MASTER'){
     $event = VIEW_GET_BRIGADA;
     $uri = $_SERVER['REQUEST_URI'];
     $peticiones = array(SET_BRIGADA, GET_SECTOR, GET_BRIGADA, DELETE_BRIGADA, EDIT_BRIGADA, ALL_BRIGADAS, TABLE_BRIGADAS,
@@ -89,6 +90,9 @@ function handler() {
         default:
             retornar_vista($event);
     }
+    }else{
+    header("location:/mvc/site_media/html/access_denied.html");
+}
 }
 
 

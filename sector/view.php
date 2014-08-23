@@ -1,5 +1,7 @@
 <?php
+session_start();
 $diccionario = array(
+    'user'=>array('{sUsuario}'=>$_SESSION["sNombre"]),
     'subtitle'=>array(VIEW_SET_SECTOR=>'Crear un nuevo Sector',
                       VIEW_GET_SECTOR=>'Buscar sector',
                       VIEW_DELETE_SECTOR=>'Eliminar un sector',
@@ -65,6 +67,7 @@ function retornar_vista_allSectores($vista, $data=array()){
     $formulario=render_dinamic_data_allSectores($formulario, $data);
     $html=get_template('template');
     $html = str_replace('{subtitulo}', $diccionario['subtitle'][$vista], $html);
+    $html = str_replace('{sUsuario}', $diccionario['user']['{sUsuario}'], $html);
     if(count($data)==0){
         $mensaje='No hay resultados para estos datos';
         $html = str_replace('{formulario}', 'ERROR', $html);
@@ -85,6 +88,7 @@ function retornar_vista($vista, $data=array()) {
     $html = get_template('template');
     $html = str_replace('{subtitulo}', $diccionario['subtitle'][$vista], $html);
     $html = str_replace('{formulario}', get_template($vista), $html);
+    $html = str_replace('{sUsuario}', $diccionario['user']['{sUsuario}'], $html);
     $html = render_dinamic_data($html, $diccionario['form_actions']);
     $html = render_dinamic_data($html, $diccionario['links_menu']);
     $html = render_dinamic_data($html, $data);

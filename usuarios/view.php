@@ -1,5 +1,7 @@
 <?php
+session_start();
 $diccionario = array(
+    'user'=>array('{sUsuario}'=>$_SESSION["sNombre"]),
     'subtitle'=>array(VIEW_SET_USER=>'Crear un nuevo usuario',
                       VIEW_GET_USER=>'Buscar usuario',
                       VIEW_DELETE_USER=>'Eliminar un usuario',
@@ -64,6 +66,7 @@ function retornar_vista_allUsers($vista, $data=array()){
     $formulario=render_dinamic_data_allUsers($formulario, $data);
     $html=get_template('template');
     $html = str_replace('{subtitulo}', $diccionario['subtitle'][$vista], $html);
+    $html = str_replace('{sUsuario}', $diccionario['user']['{sUsuario}'], $html);
     if(count($data)==0){
         $mensaje='No hay datos para este usuario';
         $html = str_replace('{formulario}', 'ERROR', $html);
@@ -84,6 +87,7 @@ function retornar_vista($vista, $data=array()) {
     $html = get_template('template');
     $html = str_replace('{subtitulo}', $diccionario['subtitle'][$vista], $html);
     $html = str_replace('{formulario}', get_template($vista), $html);
+    $html = str_replace('{sUsuario}', $diccionario['user']['{sUsuario}'], $html);
     $html = render_dinamic_data($html, $diccionario['form_actions']);
     $html = render_dinamic_data($html, $diccionario['links_menu']);
     $html = render_dinamic_data($html, $data);
