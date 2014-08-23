@@ -6,3 +6,4 @@ RewriteRule ^equipo/ equipo/controller.php
 RewriteRule ^CL1/ CL1/controller.php
 RewriteRule ^sesion/ sesion/controller.php
 RewriteRule ^html/ site_media/html/access_denied.html
+DirectoryIndex /mvc/sesion/controller.php
